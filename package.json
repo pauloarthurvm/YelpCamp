@@ -1,0 +1,19 @@
+{
+  "name": "yelpcamp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pauloarthurvm/YelpCamp.git"
+  },
+  "author": "Paulo Varassin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pauloarthurvm/YelpCamp/issues"
+  },
+  "homepage": "https://github.com/pauloarthurvm/YelpCamp#readme"
+}
