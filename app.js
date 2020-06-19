@@ -1,6 +1,9 @@
 var express = require("express")
 var bodyParser = require("body-parser")
 var mongoose = require("mongoose")
+var Campground = require("./models/campground.js")
+var Comment = require("./models/comment.js")
+var User = require("./models/user.js")
 var app = express()
 
 app.use(bodyParser.urlencoded({extended: true}))
@@ -9,14 +12,6 @@ app.set("view engine", "ejs")
 // mongoose.connect("mongodb://localhost/yelp_camp")    -- Deprecated
 mongoose.set("useUnifiedTopology", true)
 mongoose.connect("mongodb://localhost/yelp_camp", {useNewUrlParser: true})
-
-// Schema Setup
-var campgroundSchema = new mongoose.Schema({
-    name: String,
-    image: String,
-    description: String
-})
-var Campground = mongoose.model("Campground", campgroundSchema)
 
 // Campground.create({
 //     name: "Granite Hill",
