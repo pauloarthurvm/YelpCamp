@@ -2,9 +2,12 @@ var express = require("express")
 var bodyParser = require("body-parser")
 var mongoose = require("mongoose")
 var Campground = require("./models/campground.js")
-var Comment = require("./models/comment.js")
-var User = require("./models/user.js")
+// var Comment = require("./models/comment.js")
+// var User = require("./models/user.js")
+var seedDB = require("./seeds.js")
 var app = express()
+
+seedDB()
 
 app.use(bodyParser.urlencoded({extended: true}))
 app.set("view engine", "ejs")
@@ -12,26 +15,6 @@ app.set("view engine", "ejs")
 // mongoose.connect("mongodb://localhost/yelp_camp")    -- Deprecated
 mongoose.set("useUnifiedTopology", true)
 mongoose.connect("mongodb://localhost/yelp_camp", {useNewUrlParser: true})
-
-// Campground.create({
-//     name: "Granite Hill",
-//     image: "https://cdn.pixabay.com/photo/2016/02/18/22/16/tent-1208201_1280.jpg",
-//     description: "This is a huge Granite Hill, no baths, no water. Bealtiful granite!"
-// }, function(err, campground){
-//     if(err){
-//         console.log("Error: " + err)
-//     }
-//     else{
-//         console.log("New campground:")
-//         console.log(campground)
-//     }
-// })
-
-// var campgrounds = [
-//     {name: "Salmon Creek", image: "https://cdn.pixabay.com/photo/2016/01/19/16/48/teepee-1149402_1280.jpg"},
-//     {name: "Granite Hill", image: "https://cdn.pixabay.com/photo/2016/02/18/22/16/tent-1208201_1280.jpg"},
-//     {name: "Mountain Goat's Rest", image: "https://cdn.pixabay.com/photo/2015/03/26/10/29/camping-691424_1280.jpg"}
-// ]
 
 app.get("/", function (req, res) {
     res.render("landing")
@@ -79,12 +62,12 @@ app.post("/campgrounds", function(req, res){
 
 // SHOW - shows more info about one campground
 app.get("/campgrounds/:id", function(req, res){
-    var campgroundId = req.params.id
-    Campground.findById(campgroundId, function(err, foundCampground){
+    Campground.findById(req.params.id).populate("comments").exec(function(err, foundCampground){
         if(err){
             console.log("Error: " + err)
         }
         else{
+            console.log(foundCampground)
             res.render("show", {campground: foundCampground})
         }
     })
