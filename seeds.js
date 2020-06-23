@@ -37,7 +37,7 @@ function seedDB(){
                     }
                     else{
                         console.log("----------------Added a campground:")
-                        console.log(campground)
+                        // console.log(campground)
                         Comment.create({
                             text: "This place is great, but I wish there was Internet!",
                             author: "Homer"
@@ -49,7 +49,7 @@ function seedDB(){
                                 campground.comments.push(comment)
                                 campground.save()
                                 console.log("--------Created new comment!")
-                                console.log(comment)
+                                // console.log(comment)
                             }
                         })
                     }
