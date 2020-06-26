@@ -73,6 +73,7 @@ router.get("/:id/edit", function(req, res){
     })
 })
 
+// Update Campground Route
 router.put("/:id", function(req, res){
     // Find and Update the correct Campground
     Campground.findByIdAndUpdate(req.params.id, req.body.campground, function(err, updatedCampground){
@@ -87,7 +88,18 @@ router.put("/:id", function(req, res){
     // Redirect to show page
 })
 
-// Update Campground Route
+// Destroy Campground Route
+router.delete("/:id", function(req, res) {
+    Campground.findByIdAndRemove(req.params.id, function(err){
+        if(err){
+            console.log("Error: " + err)
+            res.redirect("/campgrounds")
+        }
+        else{
+            res.redirect("/campgrounds")
+        }
+    })
+})
 
 // middleware
 function isLoggedIn(req, res, next){
