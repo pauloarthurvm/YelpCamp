@@ -10,7 +10,6 @@ router.get("/", function (req, res) {
         if (err) {
             console.log("Error: " + err)
         } else {
-            console.log(allCampgrounds)
             res.render("campgrounds/index", {
                 campgrounds: allCampgrounds,
                 currentUser: req.user
@@ -55,7 +54,6 @@ router.get("/:id", function (req, res) {
         if (err) {
             console.log("Error: " + err)
         } else {
-            console.log(foundCampground)
             res.render("campgrounds/show", {
                 campground: foundCampground
             })
