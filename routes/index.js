@@ -18,11 +18,12 @@ router.post("/register", function(req, res){
     var newUser = new User({username: req.body.username})
     User.register(newUser, req.body.password, function(err, user){
         if(err){
-            console.log("Error: " + err)
+            req.flash("error", err.message)
             return res.render("register")
         }
         else{
             passport.authenticate("local")(req, res, function(){
+                req.flash("success", "Welcome to YelpCamp " + user.username)
                 res.redirect("/campgrounds")
             })
         }
@@ -49,15 +50,5 @@ router.get("/logout", function(req, res){
     req.flash("success", "Logged you out!")
     res.redirect("/campgrounds")
 })
-
-// middleware
-function isLoggedIn(req, res, next){
-    if(req.isAuthenticated()){
-        return next()
-    }
-    else{
-        res.redirect("/login")
-    }
-}
 
 module.exports = router
