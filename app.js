@@ -19,13 +19,13 @@ var indexRoutes = require("./routes/index.js")
 // Exports a variable used as Environment Variable => DATABASE_URL that is set locally as "mongodb://localhost/yelp_camp"
 // console.log(process.env.DATABASE_URL)
 // mongoose.connect("mongodb://localhost/yelp_camp")    -- Deprecated
-// mongodb+srv://yelpcampdb:<password>@cluster0.xfdzv.mongodb.net/<dbname>?retryWrites=true&w=majority
+// mongodb+srv://yelpcampdb:yelpcampdb@cluster0.xfdzv.mongodb.net/<dbname>?retryWrites=true&w=majority
 mongoose.set("useUnifiedTopology", true)
-mongoose.connect(process.env.DATABASE_URL, {
+var mongodb = process.env.DATABASE_URL || "mongodb://localhost/yelp_camp"
+mongoose.connect(mongodb, {
     useNewUrlParser: true,
     useFindAndModify: false
 })
-// var mongodb = "mongodb+srv://yelpcampdb:yelpcampdb@cluster0.xfdzv.mongodb.net/<dbname>?retryWrites=true&w=majority"
 // mongoose.connect(mongodb, {
 //     useNewUrlParser: true,
 //     useFindAndModify: false
